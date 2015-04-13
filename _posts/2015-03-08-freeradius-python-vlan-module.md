@@ -78,16 +78,19 @@ The second tuple contains the key-value pairs are inserted into the RADIUS respo
 I wanted other members of the team to be able to troubleshoot problems with RADIUS, LDAP and VLAN assignment, so I added some troubleshooting to the module. I did this by also making the module callable from the commandline. Examples:
 
 To show the VLAN that will be assigned to a user / mac address pair:
+
 ```bash
 ldap2vlan username mac-address
 ```
 
 To show the VLAN-enabled groups that a user belongs to:
+
 ```bash
 ldap2vlan username
 ```
 
 Show all groups in LDAP that provide VLAN information, sorted:
+
 ```bash
 ldap2vlan
 ```
@@ -95,6 +98,7 @@ ldap2vlan
 ## FreeRADIUS configuration
 
 In <strong> /etc/raddb/modules/python</strong>:
+
 ```bash
 python {
 	mod_instantiate = "ldap2vlan"
