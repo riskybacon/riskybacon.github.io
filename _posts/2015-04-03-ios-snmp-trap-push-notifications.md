@@ -1,22 +1,18 @@
 ---
 layout: post
 title: iOS SNMP Trap Push Notifications
-excerpt_separator: <!--more-->
 ---
 
-Push notifications are fun. If you know a bit about writing iOS apps and how to configure your app to receive push notifications, here's some code to turn SNMP traps into push notifications using <a href="http://parse.com">Parse</a>
+Push notifications are fun. If you know a bit about writing iOS apps and how to configure your app to receive push notifications, here's some code to turn SNMP traps into push notifications using [Parse](http://parse.com)
 
-<!--more-->
-
-I didn't take as good of notes as I usually do, but I believe you need to install snmp-utils on the server side. If you're using CentOS 7, issue
-
-{% highlight bash %}
-yum install net-snmp-utils
-{% endhighlight %}
+```bash
+yum install -y python-pip net-snmp-utils
+pip install git+https://github.com/dgrtwo/ParsePy.git
+```
 
 Configure /etc/snmp/snmptrapd.conf
 
-{% highlight bash %}
+```bash
 # Example configuration file for snmptrapd
 #
 # No traps are handled by default, you must edit this file!
@@ -28,11 +24,11 @@ traphandle SNMPv2-MIB::coldStart    /usr/local/bin/traphandler coldStart
 traphandle SNMPv2-MIB::warmStart    /usr/local/bin/traphandler warmStart
 traphandle IF-MIB::linkDown         /usr/local/bin/traphandler linkDown
 traphandle IF-MIB::linkUp           /usr/local/bin/traphandler linkUp
-{% endhighlight %}
+```
 
 Install /usr/local/bin/traphandler
 
-{% highlight python %}
+```python
 #!/usr/bin/python
 # 
 # Take an SNMP trap, pull it apart, send it to Parse and send out a push
@@ -50,7 +46,6 @@ parse_rest_api_key = 'your parse app rest api key'
 
 # Register the app
 register(parse_app_id, parse_rest_api_key)
-
 
 # The Parse Trap object
 class Trap(Object):
@@ -204,11 +199,12 @@ trap.save()
 Push.alert({"alert": source_ip + ' ' + message,
             "badge": "Increment",},
            where={'deviceType': 'ios'})
-{% endhighlight %}
+```
 
 Make it executable and start the traphandler:
-{% highlight bash %}
+
+```bash
 chmod 755 /usr/local/bin/traphandler
 systemctl enable snmptrapd.service
 systemctl start snmptrapd.service
-{% endhighlight %}
+```
