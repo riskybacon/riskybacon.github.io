@@ -72,7 +72,8 @@ Apr  3 11:13:36 ns-host snmptrapd[29065]: 2015-04-03 11:13:36  [UDP: [10.0.5.29]
 DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (914637588) 105 days, 20:39:35.88
 SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.6027.3.1.1.4.0.11
 SNMPv2-SMI::enterprises.6027.3.1.1.4.1.1 = INTEGER: 6
-SNMPv2-SMI::enterprises.6027.3.1.1.4.1.2 = STRING: "RPM_STATE: RPM1 is in Standby State."	SNMPv2-SMI::enterprises.6027.3.1.1.4.1.3 = INTEGER: 1
+SNMPv2-SMI::enterprises.6027.3.1.1.4.1.2 = STRING: "RPM_STATE: RPM1 is in Standby State."
+SNMPv2-SMI::enterprises.6027.3.1.1.4.1.3 = INTEGER: 1
 SNMPv2-SMI::enterprises.6027.3.1.1.4.1.4 = INTEGER: -1
 ```
 
