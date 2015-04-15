@@ -77,7 +77,7 @@ SNMPv2-SMI::enterprises.6027.3.1.1.4.1.3 = INTEGER: 1
 SNMPv2-SMI::enterprises.6027.3.1.1.4.1.4 = INTEGER: -1
 ```
 
->Now I can get back to writing a custom Python SNMP trap handler without sitting next to the switch gear.
+Now I can get back to writing a custom Python SNMP trap handler without sitting next to the switch gear.
 
 ## References
 
