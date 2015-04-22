@@ -4,15 +4,9 @@ title: Parse and Swift
 ---
 
 This tutorial was written for experienced iOS developers with an
-Objective
-This tutorial describes how to build a Swift iOS app that uses Parse,
-without using the supplied starter project. This tutorial was written
-for experienced iOS developers with an Objective-C background who
-want to use Parse in a Swift app.
+Objective-C background that want to write a Swift app that uses Parse.
 
 ## Versions
-
-This tutorial was written for:
 
  * Xcode 6.3
  * Parse SDK 1.7.1
