@@ -3,6 +3,13 @@ layout: post
 title: Installing Puppet Agent on OS X Yosemite
 ---
 
+
+I found the official [Puppet documentation](https://docs.puppetlabs.com/guides/install_puppet/install_osx.html) for installing a Puppet client onto an OS X machine to be a bit lacking and missing a couple of key steps. I don't remember exactly what was missing, but the end result after troubleshooting was this bash script.
+
+To use this script, [download](http://downloads.puppetlabs.com/mac/) the Puppet, Facter and Hiera .dmg files, open them up, and pull out the .pkg files and make them available on a web server somewhere. Point the `base_url` variable in the script to these .pkg files.
+
+This script installs a launchd service that runs as the puppet user.
+
 ```bash
 #!/bin/sh
 
@@ -52,10 +59,10 @@ done
 # Add puppet group
 $puppet resource group puppet ensure=present
 
-# Add puppet user$puppet resource user puppet ensure=present gid=puppet shell='/sbin/nologin'
+# Add puppet user
+$puppet resource user puppet ensure=present gid=puppet shell='/sbin/nologin'
 
 # Hide puppet user in list
-# Commented out, see above
 $dscl . create /Users/puppet IsHidden 1
 
 # Create launchd service
@@ -80,7 +87,8 @@ cat << EOF > $puppet_plist
         <key>ProgramArguments</key>
         <array>
                 <string>/usr/bin/puppet</string>
-                <string>agent</string>                <string>--no-daemonize</string>
+                <string>agent</string>
+                <string>--no-daemonize</string>
                 <string>--logdest</string>
                 <string>syslog</string>
                 <string>--color</string>
@@ -99,3 +107,14 @@ EOF
 $puppet resource file $puppet_empty ensure=directory owner=puppet group=puppet
 $puppet resource service $puppet_service ensure=running enable=true
 ```
+
+# Versions
+
+* OS X Yosemite 10.10
+* Puppet  3.8.1
+* Hiera 1.3.4
+* Facter 2.4.4
+
+# Financial Support
+
+This work was performed for the [The New Mexico Consortium](http://newmexicoconsortium.org)
